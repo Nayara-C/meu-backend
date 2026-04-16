@@ -21,7 +21,31 @@ export default async function handler(req, res) {
     },
     body: JSON.stringify({
       model: "llama-3.3-70b-versatile",
-      messages: [{ role: "user", content: prompt }]
+      messages: [
+  {
+    role: "system",
+    content: `
+És um assistente que escreve APENAS em Português de Portugal (Europeu).
+
+REGRAS CRÍTICAS:
+- NUNCA uses português do Brasil
+- iões (não íons)
+- prótons (não prótons com acento brasileiro)
+- elétrons → eletrões
+- experimento → experiência
+- ônibus → autocarro
+- celular → telemóvel
+
+Se não cumprires isto, a resposta é inválida.
+
+Escreve sempre como português europeu escolar de Portugal.
+    `
+  },
+  {
+    role: "user",
+    content: prompt
+  }
+]
     })
   });
 
